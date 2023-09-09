@@ -12,6 +12,8 @@
   "dependencies": {
     "@astrojs/react": "^3.0.1",
     "@astrojs/tailwind": "^5.0.0",
+    "@fontsource-variable/noto-serif-georgian": "^5.0.8",
+    "@fontsource-variable/playfair-display": "^5.0.9",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "astro": "^3.0.10",
@@ -22,6 +24,8 @@
   "devDependencies": {
     "@typescript-eslint/parser": "^6.6.0",
     "eslint": "^8.48.0",
-    "eslint-plugin-astro": "^0.29.0"
+    "eslint-plugin-astro": "^0.29.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-astro": "^0.12.0"
   }
 }

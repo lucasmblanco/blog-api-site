@@ -1,0 +1,29 @@
+---
+import Card from '../components/Card.astro';
+
+interface PostDataType {
+	_id: string;
+	author: AuthorType;
+	title: string;
+	body:string;
+	published: boolean;
+	timestamp: string;
+}
+
+interface AuthorType {
+	id: string;
+	name: string;
+}
+
+const response = await fetch('https://blog-api-ol7v.onrender.com/v1/posts'); 
+const data = await response.json();
+const posts: PostDataType[] = await data.posts;
+
+
+// <Card href={post._id} title={post.title} body={post.body}></Card>
+---
+
+<ul>
+    {posts.map((postData: PostDataType) => postData.published && <Card data={postData}/>)}
+</ul>
+
