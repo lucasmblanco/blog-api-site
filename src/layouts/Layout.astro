@@ -1,6 +1,7 @@
 ---
 import '@fontsource-variable/playfair-display';
 import '@fontsource-variable/noto-serif-georgian';
+import UserPanel from '../components/UserPanel';
 interface Props {
 	title: string;
 }
@@ -21,9 +22,9 @@ const { title } = Astro.props;
 	<body class="bg-black-brown text-ivory bg-binding w-base-width mx-auto">
 		<header class="flex justify-between">
 			<h1 class="font-sans">
-				<a href="../">incursions</a>
+				<a href="/">incursions</a>
 			</h1>
-			<div><a href="" class="hover:underline">login</a>/<a href="" class="hover:underline" >signup</a></div>
+			<UserPanel/>
 		</header>
 		<slot />
 	</body>

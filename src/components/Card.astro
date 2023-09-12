@@ -7,7 +7,7 @@ interface PostDataType {
 	_id: string;
 	author: AuthorType;
 	title: string;
-	body:string;
+	body: string;
 	published: boolean;
 	timestamp: string;
 }
@@ -16,15 +16,32 @@ interface Props {
 }
 
 const { data } = Astro.props;
+const dateInfo = new Date(data.timestamp); 
+
 ---
 
-<li class="p-10">
-	<a href={`/post/${data._id}`}>
-		<h2 class="text-2xl hover:underline font-bold mb-5">
-			{data.title}
-		</h2>
-	</a>
-	<section class="line-clamp-5 font-georgia text-sm">
-		<Fragment set:html={data.body}>	
-	</section>
+<li class="flex p-10 gap-2">
+	<div class="grid place-content-start border-2 border-ivory h-fit justify-items-center font-bold">
+		<p class="px-3 text-xl">{dateInfo.getDay()}</p>
+		<p class="px-3"> {dateInfo.toLocaleString('default', { month: 'short'})}</p>
+		<p class="px-3 bg-ivory w-full text-black-brown">{dateInfo.getFullYear()}</p>
+	</div>
+	<div>
+		<a href={`/post/${data._id}`}>
+			<h2 class="text-2xl hover:underline font-bold mb-5">
+				{data.title}
+			</h2>
+		</a>
+		<section class="line-clamp-5 font-georgia text-sm">
+			<Fragment set:html={data.body}/>	
+		</section>
+	</div>
 </li>
+<style is:global>
+.markdown{
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+}
+</style>
