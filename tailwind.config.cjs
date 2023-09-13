@@ -11,7 +11,8 @@ module.exports = {
 			},
 			colors: {
 				'black-brown': 'hsl(300, 3%, 12%)',
-				ivory: 'hsl(60, 100%, 97%)'
+				ivory: 'hsl(60, 100%, 97%)',
+				'black-brown-dark': 'hsla(300, 3%, 9%, 1)'
 			}, 
 			backgroundImage: {
 				'binding': "url('/src/assets/binding-dark.png')"

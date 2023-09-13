@@ -21,7 +21,7 @@ const dateInfo = new Date(data.timestamp);
 ---
 
 <li class="flex p-10 gap-2">
-	<div class="grid place-content-start border-2 border-ivory h-fit justify-items-center font-bold">
+	<div class="grid place-content-start border-2 border-ivory h-fit justify-items-center font-bold rounded-md">
 		<p class="px-3 text-xl">{dateInfo.getDay()}</p>
 		<p class="px-3"> {dateInfo.toLocaleString('default', { month: 'short'})}</p>
 		<p class="px-3 bg-ivory w-full text-black-brown">{dateInfo.getFullYear()}</p>

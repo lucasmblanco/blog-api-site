@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/Layout.astro';
+import UserComment from '../../components/UserComment';
+import PostComments from '../../components/PostComments';
 
 interface AuthorType {
 	id: string;
@@ -24,7 +26,7 @@ export async function getStaticPaths() {
     })
 }
 
-const { postData, author } = Astro.props;
+const { postData } = Astro.props;
 
 ---
 <BaseLayout title={postData.title}>
@@ -34,4 +36,6 @@ const { postData, author } = Astro.props;
     <main class="grid auto-cols-auto gap-5">
         <p set:html={postData.body} class="my-5"></p>
     </main>
+    <UserComment />
+    <PostComments />
 </BaseLayout>
