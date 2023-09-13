@@ -2,12 +2,18 @@
 import '@fontsource-variable/playfair-display';
 import '@fontsource-variable/noto-serif-georgian';
 import UserPanel from '../components/UserPanel';
+//import QueryProvider from '../components/QueryProvider';
+
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
+
+
+
 ---
+
 
 <!doctype html>
 <html lang="en">
@@ -19,14 +25,16 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="bg-black-brown text-ivory bg-binding w-base-width mx-auto">
-		<header class="flex justify-between py-2">
-			<h1 class="font-sans">
-				<a href="/">incursions</a>
-			</h1>
-			<UserPanel client:load/>
-		</header>
-		<slot />
-	</body>
+
+		<body class="bg-black-brown text-ivory bg-binding w-base-width mx-auto">
+			<header class="flex justify-between py-2">
+				<h1 class="font-sans">
+					<a href="/">incursions</a>
+				</h1>
+				<UserPanel client:load/>
+			</header>
+			<slot />
+		</body>
+
 </html>
 
