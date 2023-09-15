@@ -31,8 +31,8 @@ export default function PostComments({id} : {id: string}) {
   return (        
     <>
       <hr></hr>
-        <section>
-        {commentsQuery.data?.comments.length > 0 ? commentsQuery.data?.comments.map((comment: CommentInterface) => <Comment key={comment._id} data={comment} postId={id} />) : <p>no comments</p>}
+        <section className='grid gap-2 font-georgia py-2'>
+        {commentsQuery.data?.comments.length > 0 ? commentsQuery.data.comments.map((comment: CommentInterface) => <Comment key={comment._id} data={comment} postId={id} />) : <p>no comments</p>}
         </section>
     </>
 

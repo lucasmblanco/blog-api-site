@@ -12,6 +12,7 @@ module.exports = {
 			colors: {
 				'black-brown': 'hsl(300, 3%, 12%)',
 				ivory: 'hsl(60, 100%, 97%)',
+				'ivory-transparent': 'hsla(60, 100%, 97%, 0.1)',
 				'black-brown-dark': 'hsla(300, 3%, 9%, 1)'
 			}, 
 			backgroundImage: {

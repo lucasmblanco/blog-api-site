@@ -6,9 +6,6 @@ interface AuthorType {
 	id: string;
 	username: string;
 }
-
-//  <PostComments client:load id={postData._id}/>
-
 interface PostDataType {
 	_id: string;
 	author: AuthorType;
@@ -30,13 +27,14 @@ const { postData } = Astro.props;
 
 ---
 <BaseLayout title={postData.title}>
-    <h1 class="text-3xl py-10">{postData.title}</h1>
+    <h1 class="text-3xl py-10 text-center">{postData.title}</h1>
     <p class="opacity-50">{new Date(postData.timestamp).toLocaleDateString()}</p>
     <p class="opacity-100"><span class="opacity-50">by </span>{postData.author.username}</p>
     <main class="grid auto-cols-auto gap-5">
         <p set:html={postData.body} class="my-5"></p>
     </main>
-    <QueryProvider client:load id={postData._id}/>
+    <hr/>
+    <QueryProvider client:visible id={postData._id}/>
 </BaseLayout>
 
 

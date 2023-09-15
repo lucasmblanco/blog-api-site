@@ -9,13 +9,13 @@ interface DataComment {
 
 export default function UserComment({ id, isOnComment = false, postId}: { id: string; isOnComment?: boolean, postId?: string }) {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<DataComment>();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<DataComment>();
     
     const queryClient = useQueryClient();
 
     const commentMutation = useMutation({
         mutationFn: createComment,
-        onSuccess: () =>queryClient.invalidateQueries(['comments'])
+        onSuccess: () => queryClient.invalidateQueries(['comments'])
     })
 
     const commentOnCommentMutation = useMutation({
@@ -33,20 +33,19 @@ export default function UserComment({ id, isOnComment = false, postId}: { id: st
             commentMutation.mutate({
             id: id,
             body: data.comment
-        })
+            })
+        reset();
     }
   return (
-      <>
-          <hr></hr>
-          <section>
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-2 py-2">
-                <label className="text-sm" htmlFor="comment">what do you think? comment below 👇</label>
-                <textarea {...register('comment')} id="comment" cols={30} rows={3} className="bg-black-brown rounded-lg resize-none p-1 active:border-ivory"></textarea>
-                <button type='submit'>Post Comment</button>
+      
+          <section className='font-georgia py-2'>
+            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 py-2">
+                <label htmlFor="comment" hidden>Comment</label>
+                <textarea {...register('comment')} id="comment" className="outline-none border text-sm border-black-brown bg-black-brown-dark rounded-lg resize-none p-2 focus:border-ivory" placeholder='Write a comment...'></textarea>
+                <button type='submit' className='bg-ivory text-sm text-black-brown w-fit justify-self-end px-2 py-1 rounded hover:opacity-50'>Post Comment</button>
             </form>
           </section>
-      </>
-
+      
   )
 }
 
