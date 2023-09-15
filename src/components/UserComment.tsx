@@ -3,26 +3,38 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
-export default function UserComment({ id, isOnComment = false}: { id: string; isOnComment?: boolean }) {
+interface DataComment {
+    comment: string;
+}
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+export default function UserComment({ id, isOnComment = false, postId}: { id: string; isOnComment?: boolean, postId?: string }) {
+
+    const { register, handleSubmit, formState: { errors } } = useForm<DataComment>();
     
     const queryClient = useQueryClient();
 
     const commentMutation = useMutation({
-        mutationFn: isOnComment ? createCommentOnComment : createComment,
-        onSuccess: () =>  queryClient.invalidateQueries(['comments'])
+        mutationFn: createComment,
+        onSuccess: () =>queryClient.invalidateQueries(['comments'])
     })
 
-    function onSubmit(data: any) {
-        
-        commentMutation.mutate({
+    const commentOnCommentMutation = useMutation({
+        mutationFn:  createCommentOnComment,
+        onSuccess: () => queryClient.invalidateQueries(['commentsOnComment', id])
+    })
+
+    function onSubmit(data: DataComment) {
+        isOnComment ?
+            commentOnCommentMutation.mutate({
+            postId: postId as string,
+            body: data.comment, 
+            commentId: id
+            }) :
+            commentMutation.mutate({
             id: id,
             body: data.comment
         })
     }
-
-
   return (
       <>
           <hr></hr>
@@ -38,7 +50,7 @@ export default function UserComment({ id, isOnComment = false}: { id: string; is
   )
 }
 
-async function createComment({ id, body }: { id: string, body: string }) {
+async function createComment({ id, body, }: { id: string, body: string }) {
     const data = {
         body: body
     }
@@ -60,13 +72,13 @@ async function createComment({ id, body }: { id: string, body: string }) {
     }
 }
 
-async function createCommentOnComment({ id, body }: { id: string, body: string }) {
+async function createCommentOnComment({ postId, body, commentId}: { postId: string, body: string, commentId: string }) {
     const data = {
         body: body
     }
     try {
         const response = await axios.post(
-            `https://blog-api-ol7v.onrender.com/v1/posts/${id}/comments`,
+            `https://blog-api-ol7v.onrender.com/v1/posts/${postId}/comments/${commentId}`,
             data,
             {
                 headers: {

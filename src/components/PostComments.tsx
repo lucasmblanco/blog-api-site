@@ -32,7 +32,7 @@ export default function PostComments({id} : {id: string}) {
     <>
       <hr></hr>
         <section>
-        {commentsQuery.data?.comments.length > 0 ? commentsQuery.data?.comments.map((comment: CommentInterface) => <Comment key={comment._id} data={comment}/>) : <p>no comments</p>}
+        {commentsQuery.data?.comments.length > 0 ? commentsQuery.data?.comments.map((comment: CommentInterface) => <Comment key={comment._id} data={comment} postId={id} />) : <p>no comments</p>}
         </section>
     </>
 
