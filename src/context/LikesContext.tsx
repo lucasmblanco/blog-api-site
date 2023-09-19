@@ -1,22 +1,19 @@
 import { createContext, useReducer } from 'react';
 
 interface StateType {
-  likesCount: string;
-  status: boolean;
+  likes: any[];
 };
 
 interface ActionType {
-  type: 'UPDATE_LIKES';
+  type: 'CONTENT_LIKES';
   payload: {
-    count: string;
-    status: boolean;
+    likes: any[];
   };
 }
 
 
 const INITIAL_STATE: StateType = {
-  likesCount: '0',
-  status: false
+  likes: []
 };
 
 export const LikesContext = createContext<{
@@ -28,6 +25,7 @@ export const LikesContext = createContext<{
 });
 
 export const LikesProvider = ({ children }: { children: React.ReactNode }) => {
+  
   const [state, dispatch] = useReducer<React.Reducer<StateType, ActionType>>(
     reducer,
     INITIAL_STATE
@@ -42,10 +40,9 @@ export const LikesProvider = ({ children }: { children: React.ReactNode }) => {
 
 const reducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
-      case 'UPDATE_LIKES': 
+      case 'CONTENT_LIKES': 
           return {
-            likesCount: action.payload?.count,
-            status: action.payload?.status
+            likes: action.payload?.likes
           }
     default:
       return state;
