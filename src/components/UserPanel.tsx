@@ -4,7 +4,8 @@ export default function UserPanel() {
   const [loginState, setLoginState] = useState(false); 
   useEffect(() => {
     const username = localStorage.getItem('username'); 
-    if (username) {
+    const id = localStorage.getItem('id'); 
+    if (username && id) {
       setLoginState(true);
     } else {
       setLoginState(false);
@@ -24,7 +25,6 @@ export default function UserPanel() {
             <a href="/login" className="hover:underline">login</a>
           /<a href="/signup" className="hover:underline" >signup</a>
       </div>
-         
       }
     </>
   )

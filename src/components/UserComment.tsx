@@ -1,14 +1,23 @@
-import React from 'react'; 
+import React, { useEffect, useRef } from 'react'; 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import LikeButton from './LikeButton';
+import LikeCounter from './LikeCounter';
+import {LikesProvider} from '../context/LikesContext';
 
 interface DataComment {
     comment: string;
 }
 
-export default function UserComment({ id, isOnComment = false, postId}: { id: string; isOnComment?: boolean, postId?: string }) {
+interface AuthorInterface {
+    _id: string;
+    username: string;
+  }
 
+export default function UserComment({ id, isOnComment = false, postId, author}: { id: string; isOnComment?: boolean, postId?: string, author: AuthorInterface}) {
+
+    const userForm = useRef<HTMLFormElement>(null);
     const { register, handleSubmit, formState: { errors }, reset } = useForm<DataComment>();
     
     const queryClient = useQueryClient();
@@ -36,16 +45,27 @@ export default function UserComment({ id, isOnComment = false, postId}: { id: st
             })
         reset();
     }
+
+    useEffect(() => {
+        isOnComment && userForm.current?.scrollIntoView({ behavior: 'smooth' });
+    },[])
   return (
       
-          <section className='font-georgia py-2'>
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 py-2">
+      <section className='font-georgia py-2'>
+            <form ref={userForm} onSubmit={handleSubmit(onSubmit)} className="grid gap-3 py-2">
                 <label htmlFor="comment" hidden>Comment</label>
-                <textarea {...register('comment')} id="comment" className="outline-none border text-sm border-black-brown bg-black-brown-dark rounded-lg resize-none p-2 focus:border-ivory" placeholder='Write a comment...'></textarea>
+              <textarea {...register('comment')} id="comment" className="outline-none border text-sm border-black-brown bg-black-brown-dark rounded-lg resize-none p-2 focus:border-ivory" placeholder='Write a comment...'></textarea>
+              <div className='flex justify-between'>
+              <LikesProvider>
+                    <div className='flex items-center gap-1'>
+                        <LikeCounter id={id} isOnComment={isOnComment}/>
+                        <LikeButton id={id} isOnComment={isOnComment}/>
+                    </div>
+                </LikesProvider>
                 <button type='submit' className='bg-ivory text-sm text-black-brown w-fit justify-self-end px-2 py-1 rounded hover:opacity-50'>Post Comment</button>
+              </div>
             </form>
           </section>
-      
   )
 }
 

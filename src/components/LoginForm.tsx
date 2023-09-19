@@ -25,6 +25,7 @@ export default function loginForm() {
 
             if (response.data.code === 200) {
                 localStorage.setItem('username', response.data.user.username); 
+                localStorage.setItem('id', response.data.user.id); 
                 window.location.replace('/'); 
             }
             

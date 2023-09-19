@@ -18,6 +18,7 @@ interface CommentInterface  {
 }
 
 export default function Comment({ data, postId, isOnComment = false }: { data: CommentInterface; postId: string; isOnComment?: boolean }) {
+  
   const [reply, setReply] = useState(false);
 
     const commentsOnCommentQuery = useQuery({
@@ -39,7 +40,7 @@ export default function Comment({ data, postId, isOnComment = false }: { data: C
       <div className='flex justify-end py-2'>
       <button onClick={handleClick} className='py-1 self-end text-xs border-ivory border text-ivory rounded px-2 w-fit hover:bg-ivory hover:text-black-brown'>Reply</button>
       </div>
-      {reply && <UserComment id={data._id} isOnComment={true} postId={postId} />}
+      {reply && <UserComment id={data._id} isOnComment={true} postId={postId} author={data.author} />}
       <div className='grid gap-1'>
         {commentsOnCommentQuery.data?.comments.length > 0 && commentsOnCommentQuery.data.comments.map((comment: CommentInterface) => <Comment key={comment._id} data={comment} postId={postId} isOnComment={true}/>)}
       </div>
