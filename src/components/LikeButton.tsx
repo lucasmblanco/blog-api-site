@@ -1,3 +1,4 @@
+import React from 'react';
 import { HandThumbUpIcon } from '@heroicons/react/24/outline';
 import { useLike } from '../hooks/LikeHook';
 

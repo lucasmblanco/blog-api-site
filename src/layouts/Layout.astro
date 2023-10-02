@@ -10,8 +10,6 @@ interface Props {
 
 const { title } = Astro.props;
 
-
-
 ---
 
 
@@ -25,8 +23,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-
-		<body class="bg-black-brown text-ivory bg-binding w-base-width mx-auto">
+		<body class="flex flex-col bg-black-brown text-ivory bg-binding w-base-width mx-auto h-[100vh]">
 			<header class="flex justify-between py-2">
 				<h1 class="font-sans">
 					<a href="/">incursions</a>

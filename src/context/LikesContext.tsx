@@ -25,12 +25,10 @@ export const LikesContext = createContext<{
 });
 
 export const LikesProvider = ({ children }: { children: React.ReactNode }) => {
-  
   const [state, dispatch] = useReducer<React.Reducer<StateType, ActionType>>(
     reducer,
     INITIAL_STATE
   );
-    
   return (
     <LikesContext.Provider value={{ state, dispatch }}>
       {children}

@@ -3,10 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { LikesContext } from '../context/LikesContext';
 import { likePost, likeComment, dislikePost, dislikeComment } from '../services/likeServices';
 
-const queryClient = useQueryClient();
-
 export const useLike = function({ id, isOnComment }: { id: string; isOnComment: boolean}){
-    
+    const queryClient = useQueryClient();
     const { state } = useContext(LikesContext);
   
     const likePostMutation = useMutation({
@@ -40,9 +38,11 @@ export const useLike = function({ id, isOnComment }: { id: string; isOnComment: 
     
   const likeStatus = useMemo(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
-      const userId = window.localStorage.getItem('id');
-      return state.likes.some((likes: any) => likes.author === userId);
+      if (window.localStorage.getItem('user') !== null) {
+        const user = JSON.parse(window.localStorage.getItem('user')!);
+        return state.likes.some((likes: any) => likes.author === user.id);
     }
+     }
     }, [state.likes])
     return {
         handleClick, likeStatus
