@@ -1,42 +1,51 @@
-# Astro Starter Kit: Basics
+[:es:](#projecto-blog) [:us:](#project-blog)
+# Projecto: Blog
+**Este proyecto consta de 3 partes diferentes, podes encontrarlas acá:**
 
-```
-npm create astro@latest -- --template basics
-```
-## 🚀 Project Structure
+ -  [Blog API](https://github.com/lucasmblanco/blog-api-be)
+ - [ Admin Dashboard](https://github.com/lucasmblanco/blog-api-admin-dashboard)
+ - [Blog](https://github.com/lucasmblanco/blog-api-site)
 
-Inside of your Astro project, you'll see the following folders and files:
+Este proyecto se encarda de utlizar la API Blog para poder mostrar los post que hay dentro de una base de datos. También permite la creación de usuarios para brindarles la posibilidad de dejar likes y comentarios en los posts y tambien en otros comentarios
 
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Tecnologías utilizadas 📚
+![Tools](https://skillicons.dev/icons?i=ts,react,astro,tailwindcss)
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Principales características ⭐
+ - Nos permite visualizar los post que estan marcadas dentro de la base de datos como visibles.
+ - Los usuarios pueden crear comentarios y likes dentro de los posteos como también dentro de los comentarios que existen en estos mismos.
+ - Los usuarios pueden eliminar sus propios comentarios.  
+## Conclusión 🙌
+Elegí Astro como framework ya que consideré que lo mejor era que la página utilice SSR como patrón de renderizado ya que la principal función de la aplicación era visualizar correctamente los posteos. Los componentes que estan relacionados a la visualización y la creación de nuevos comentarios utlizan el patrón CSR ya que los usuarios tienen que interactuar con estos mismos, y de esta forma podia reflejar los cambios que se producian con el mejor rendimiento posible.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Nuevamente utilizo localStorage para visualizar el estado de logueo en algunos componentes. 
+<br/> 
+***
+<br/>
 
-Any static assets, like images, can be placed in the `public/` directory.
 
-## 🧞 Commands
+# Project: Blog
 
-All commands are run from the root of the project, from a terminal:
+**This project consists of 3 different parts, you can find them here:**
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+-   [Blog API](https://github.com/lucasmblanco/blog-api-be)
+-   [Admin Dashboard](https://github.com/lucasmblanco/blog-api-admin-dashboard)
+-   [Blog](https://github.com/lucasmblanco/blog-api-site)
 
+This project uses the Blog API to display the posts stored in a database. It also allows the creation of users to enable them to leave likes and comments on the posts and also on other comments.
+
+## Technologies Used 📚
+
+![Tools](https://skillicons.dev/icons?i=ts,react,astro,tailwindcss)
+
+## Key Features ⭐
+
+-   It allows us to view the posts that are marked as visible in the database.
+-   Users can create comments and likes within the posts as well as within the comments that exist within these posts.
+-   Users can delete their own comments.
+
+## Conclusion 🙌
+
+I chose Astro as the framework because I considered it best for the page to use SSR (Server-Side Rendering) as the rendering pattern, as the primary function of the application was to correctly display the posts. The components related to viewing and creating new comments use the CSR (Client-Side Rendering) pattern, as users need to interact with them, and this way I could reflect the changes that occurred with the best performance possible.
+
+Once again, I use localStorage to track the login status on some components.
