@@ -49,7 +49,7 @@ export default function loginForm() {
                     </div>
                     <div className='flex gap-2'>
                         <label htmlFor='password'>password:</label>
-                        <input type="text" id="password" {...register('password')} className='text-ivory bg-transparent border-b border-ivory w-full outline-none'/>
+                        <input type="password" id="password" {...register('password')} className='text-ivory bg-transparent border-b border-ivory w-full outline-none'/>
                     </div>
                     <button type='submit' className='flex items-center justify-center hover:bg-ivory hover:text-black-brown rounded py-2 text-lg font-bold'><ArrowLongRightIcon className='h-6 w-6'/>Log in <ArrowLongLeftIcon className='h-6 w-6'/></button>
             </form>
