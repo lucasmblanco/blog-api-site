@@ -40,7 +40,7 @@ const { postData } = Astro.props;
         <p set:html={postData.body} class="my-5"></p>
     </main>
     <hr/>
-    <QueryProvider client:visible id={postData._id}/>
+    <QueryProvider client:load id={postData._id}/>
 </BaseLayout>
 
 

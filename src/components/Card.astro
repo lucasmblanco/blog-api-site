@@ -21,8 +21,8 @@ const dateInfo = new Date(data.timestamp);
 ---
 
 <li class="flex gap-2">
-	<div class="grid place-content-start  border-r-2 border-ivory h-fit justify-items-center font-bold font-georgia">
-		<p class="px-3 text-4xl">{dateInfo.getDay()}</p>
+	<div class="grid place-content-start  border-r-2 border-ivory h-fit justify-items-end font-bold font-georgia text-md">
+		<p class="px-3 text-xl">{dateInfo.getDay()}</p>
 		<p class="px-3"> {dateInfo.toLocaleString('default', { month: 'short'})}</p>
 		<p class="px-3 bg-ivory w-full text-black-brown">{dateInfo.getFullYear()}</p>
 	</div>
@@ -33,9 +33,10 @@ const dateInfo = new Date(data.timestamp);
 					{data.title}
 				</h2>
 			</a>
-			<section class="line-clamp-5 font-georgia text-sm opacity-70 select-none">
+			<section class="line-clamp-4 md:line-clamp-6 font-georgia text-sm opacity-70 select-none">
 				<Fragment set:html={data.body}/>	
 			</section>
+			<a href={`/post/${data._id}`} class="w-full text-end hover:underline">Read more...</a>
 		</div>
 	</div>
 </li>

@@ -35,8 +35,7 @@ export default function SignupForm() {
         }
     }
   return (
-    <>
-      <div className='flex flex-col border-dashed border-2 border-ivory rounded-md'>
+      <main className='flex flex-col border-dashed border-2 border-ivory rounded-md'>
             <h1 className='text-4xl py-8 px-4'>
             /signup
             </h1>
@@ -52,10 +51,13 @@ export default function SignupForm() {
                     </div>
                     <button type='submit' className='flex items-center justify-center hover:bg-ivory hover:text-black-brown rounded py-2 text-lg font-bold'><ArrowLongRightIcon className='h-6 w-6'/>Sign up<ArrowLongLeftIcon className='h-6 w-6'/></button>
             </form>
-          </div>
-          <div className='hidden md:block scale-[2.5] translate-x-56 translate-y-60' >
-            <SignImg />
-          </div>
-    </>
+          </main>
   )
 }
+
+
+/*
+  <div className='hidden md:block scale-[2.5] translate-x-56 translate-y-60' >
+            <SignImg />
+          </div>
+          */
