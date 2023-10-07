@@ -13,6 +13,7 @@ const initialState = {
 export default function UserPanel() {
   //const [loginState, setLoginState] = useState(initialState); 
   const $user = useStore(user); 
+  const [isLogged, setIsLogged] = useState(false);
   
   async function handleClick() {
     await axios.post(
@@ -28,16 +29,18 @@ export default function UserPanel() {
   useEffect(() => {
     if (localStorage.getItem('user') === null) { 
       user.set(initialState);
+      setIsLogged(false);
     } else {
       const localUser = JSON.parse(localStorage.getItem('user')!); 
       if (localUser.username && localUser.id) {
-        user.set({logged: true, username: localUser.username});
+        user.set({ logged: true, username: localUser.username });
+        setIsLogged(true);
       }
     } 
   }, [])
   return (
     <>
-      {$user.logged ?
+      {isLogged ?
         <div className='border border-ivory rounded-md p-1'>
           <p className='text-xs flex items-center gap-1'>
             you are logged as

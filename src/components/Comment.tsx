@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useEffect, useState }  from 'react'
 import UserComment from './UserComment';
 import { useQuery } from '@tanstack/react-query';
 
@@ -20,6 +20,7 @@ interface CommentInterface  {
 export default function Comment({ data, postId, isOnComment = false }: { data: CommentInterface; postId: string; isOnComment?: boolean }) {
   
   const [reply, setReply] = useState(false);
+  const [comments, setComments] = useState([]);
 
     const commentsOnCommentQuery = useQuery({
     queryKey: ['commentsOnComment', data._id],
@@ -27,11 +28,18 @@ export default function Comment({ data, postId, isOnComment = false }: { data: C
       fetch(`https://blog-api-ol7v.onrender.com/v1/posts/${postId}/comments/${data._id}`).then(res =>
         res.json()
         ),
-  });
+    });
+  
 
   function handleClick() {
     setReply(prevState => !prevState); 
   }
+
+  useEffect(() => {
+    if(commentsOnCommentQuery.isSuccess) {setComments(commentsOnCommentQuery.data.comments); }
+  }, [ commentsOnCommentQuery.data])
+
+
 
   return (
     <div className={`grid p-2 border-b-2 border-2 border-ivory-transparent ${isOnComment ? 'bg-black-brown'  : 'bg-ivory-transparent'}`}>
@@ -42,7 +50,7 @@ export default function Comment({ data, postId, isOnComment = false }: { data: C
       </div>
       {reply && <UserComment id={data._id} isOnComment={true} postId={postId}/>}
       <div className='grid gap-1'>
-        {commentsOnCommentQuery.data?.comments.length > 0 && commentsOnCommentQuery.data.comments.map((comment: CommentInterface) => <Comment key={comment._id} data={comment} postId={postId} isOnComment={true}/>)}
+        {comments.map((comment: CommentInterface) => <Comment key={comment._id} data={comment} postId={postId} isOnComment={true}/>)}
       </div>
     </div>
   )

@@ -27,7 +27,7 @@ export default function loginForm() {
 
             if (response.data.code === 200) {
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                window.location.replace('/'); 
+                window.location.replace('/blog/'); 
             }
             
         } catch (err) {

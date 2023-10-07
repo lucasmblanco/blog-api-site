@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'; 
+import React, { useEffect, useRef, useState } from 'react'; 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
@@ -8,20 +8,18 @@ import { LikesProvider } from '../context/LikesContext';
 import { useStore } from '@nanostores/react';
 import { user } from '../stores/userStore';
 import { HandThumbUpIcon } from '@heroicons/react/24/outline';
+import PostButtonComment from './PostButtonComment';
+import { HydrationProvider, Server, Client } from "react-hydration-provider";
 
 interface DataComment {
     comment: string;
 }
 
-interface AuthorInterface {
-    _id: string;
-    username: string;
-  }
-
 export default function UserComment({ id, isOnComment = false, postId}: { id: string; isOnComment?: boolean, postId?: string}) {
     const $user = useStore(user); 
     const userForm = useRef<HTMLFormElement>(null);
     const { register, handleSubmit, formState: { errors }, reset } = useForm<DataComment>();
+    const [userIsLogged, setUserIsLogged] = useState(false);
     
     const queryClient = useQueryClient();
 
@@ -53,29 +51,32 @@ export default function UserComment({ id, isOnComment = false, postId}: { id: st
         isOnComment && userForm.current?.scrollIntoView({ behavior: 'smooth' });
     }, [])
 
+    useEffect(() => {
+        if ($user.logged) {
+            setUserIsLogged(true); 
+        } else {
+            setUserIsLogged(false);
+        }
+    })
   
     
     return (
-      <section className='font-georgia py-2'>
-            <form ref={userForm} onSubmit={handleSubmit(onSubmit)} className="grid gap-3 py-2">
-                <label htmlFor="comment" hidden>Comment</label>
-              <textarea {...register('comment')} id="comment" className="outline-none border text-sm border-black-brown bg-black-brown-dark rounded-lg resize-none p-2 focus:border-ivory" placeholder='Write a comment...'></textarea>
-              <div className='flex justify-between'>
-              <LikesProvider>
-                    <div className='flex items-center gap-1'>
-                        <LikeCounter id={id} isOnComment={isOnComment}/>
-                            {
-                                $user.logged ? <LikeButton id={id} isOnComment={isOnComment}/> : <HandThumbUpIcon className='h-6 w-6 text-ivory'/> 
-                       }
+            <section className='font-georgia py-2'>
+                <form ref={userForm} onSubmit={handleSubmit(onSubmit)} className="grid gap-3 py-2">
+                    <label htmlFor="comment" hidden>Comment</label>
+                    <textarea {...register('comment')} id="comment" className="outline-none border text-sm border-black-brown bg-black-brown-dark rounded-lg resize-none p-2 focus:border-ivory" placeholder='Write a comment...'>
+                    </textarea>
+                    <div className='flex justify-between'>
+                        <LikesProvider>
+                            <div className='flex items-center gap-1'>
+                                <LikeButton id={id} isOnComment={isOnComment} userIsLogged={userIsLogged} />
+                                <LikeCounter id={id} isOnComment={isOnComment}/>
+                            </div>
+                        </LikesProvider>
+                    <PostButtonComment userStatus={userIsLogged} />
                     </div>
-                </LikesProvider>
-                    {
-                    $user.logged ? <button type='submit' className='bg-ivory text-sm text-black-brown w-fit justify-self-end px-2 py-1 rounded hover:opacity-50'>Post Comment</button> :
-                    <p className='text-xs'>log to post a comment</p>
-                }
-              </div>
-            </form>
-          </section>
+                </form>
+            </section>
   )
 }
 

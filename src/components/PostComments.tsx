@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Comment from './Comment'
 import { useQuery } from '@tanstack/react-query';
 
@@ -19,7 +19,8 @@ interface CommentInterface  {
 
 
 
-export default function PostComments({id} : {id: string}) {
+export default function PostComments({ id }: { id: string }) {
+  const [postComments, setPostComments] = useState<any>([]); 
   const commentsQuery = useQuery({
     queryKey: ['comments'],
     queryFn: () =>
@@ -28,14 +29,19 @@ export default function PostComments({id} : {id: string}) {
       )
   });
 
+  useEffect(() => {
+    if (commentsQuery.isSuccess) {
+      setPostComments(commentsQuery.data.comments); 
+    }
+},[commentsQuery.data])
+
   return (        
     <>
       <hr></hr>
         <section className='grid gap-2 font-georgia py-2'>
-        {commentsQuery.data?.comments.length > 0 ? commentsQuery.data.comments.map((comment: CommentInterface) => <Comment key={comment._id} data={comment} postId={id} />) : <p>no comments</p>}
+        {postComments.length > 0 ? postComments.map((comment: CommentInterface) => <Comment key={comment._id} data={comment} postId={id} />) : <p className='w-full text-center'>no comments</p>}
         </section>
     </>
-
   )
 }
 
