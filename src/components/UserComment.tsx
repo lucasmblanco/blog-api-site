@@ -7,9 +7,7 @@ import LikeCounter from './LikeCounter';
 import { LikesProvider } from '../context/LikesContext';
 import { useStore } from '@nanostores/react';
 import { user } from '../stores/userStore';
-import { HandThumbUpIcon } from '@heroicons/react/24/outline';
 import PostButtonComment from './PostButtonComment';
-import { HydrationProvider, Server, Client } from "react-hydration-provider";
 
 interface DataComment {
     comment: string;

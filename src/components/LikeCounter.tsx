@@ -3,6 +3,19 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { LikesContext } from '../context/LikesContext';
 
+interface LikeInterface  {
+    "_id": string;
+    "on": string;
+    "onModel": string;
+    "author": string;
+  }
+interface ActionType {
+    type: 'CONTENT_LIKES';
+    payload: {
+      likes: LikeInterface[];
+    };
+  }
+
 export default function LikeCounter({ id, isOnComment }: { id: string, isOnComment: boolean }) {
     const [ likeCount, setLikeCount ] = useState(0);
     const { dispatch } = useContext(LikesContext);
@@ -20,14 +33,14 @@ export default function LikeCounter({ id, isOnComment }: { id: string, isOnComme
     )
 }
 
-const getPostLikes = async (id: string, dispatch: any) => {
+const getPostLikes = async (id: string, dispatch: React.Dispatch<ActionType>) => {
     const response = await axios.get(`https://blog-api-ol7v.onrender.com/v1/posts/${id}/likes`); 
     const responseData = await response.data;
     dispatch({ type: 'CONTENT_LIKES', payload: {likes: response.data?.likes} })
     return responseData;
 }
 
-const getCommentsLikes = async (id: string, dispatch: any) => {
+const getCommentsLikes = async (id: string, dispatch: React.Dispatch<ActionType>) => {
     const response = await axios.get(`https://blog-api-ol7v.onrender.com/v1/comments/${id}/likes/`); 
     const responseData = await response.data;
     dispatch({ type: 'CONTENT_LIKES', payload: {likes: response.data?.likes} })

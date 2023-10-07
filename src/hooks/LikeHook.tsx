@@ -3,6 +3,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { LikesContext } from '../context/LikesContext';
 import { likePost, likeComment, dislikePost, dislikeComment } from '../services/likeServices';
 
+interface LikeInterface  {
+  "_id": string;
+  "on": string;
+  "onModel": string;
+  "author": string;
+}
+
 export const useLike = function ({ id, isOnComment }: { id: string; isOnComment: boolean }) {
     const [isLiked, setIsLiked] = useState(false);
     const queryClient = useQueryClient();
@@ -41,7 +48,7 @@ export const useLike = function ({ id, isOnComment }: { id: string; isOnComment:
     if (typeof window !== 'undefined' && window.localStorage) {
       if (window.localStorage.getItem('user') !== null) {
         const user = JSON.parse(window.localStorage.getItem('user')!);
-       setIsLiked(state.likes.some((likes: any) => likes.author === user.id))
+       setIsLiked(state.likes.some((likes: LikeInterface) => likes.author === user.id))
     }
      }
     }, [state.likes])

@@ -20,7 +20,7 @@ interface CommentInterface  {
 
 
 export default function PostComments({ id }: { id: string }) {
-  const [postComments, setPostComments] = useState<any>([]); 
+  const [postComments, setPostComments] = useState<CommentInterface[]>([]); 
   const commentsQuery = useQuery({
     queryKey: ['comments'],
     queryFn: () =>

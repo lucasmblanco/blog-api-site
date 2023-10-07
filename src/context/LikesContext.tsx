@@ -1,16 +1,22 @@
 import { createContext, useReducer } from 'react';
 
 interface StateType {
-  likes: any[];
+  likes: LikeInterface[];
 };
 
 interface ActionType {
   type: 'CONTENT_LIKES';
   payload: {
-    likes: any[];
+    likes: LikeInterface[];
   };
 }
 
+interface LikeInterface  {
+  "_id": string;
+  "on": string;
+  "onModel": string;
+  "author": string;
+}
 
 const INITIAL_STATE: StateType = {
   likes: []
