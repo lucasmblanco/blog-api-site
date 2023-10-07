@@ -9,13 +9,14 @@
             .prefix__cls-1,
             .prefix__cls-4,
             .prefix__cls-7 {
-                fill-rule: evenodd
+                fill-rule: evenodd;
+                fill: hsl(60, 100%, 97%);
             }
 
             .prefix__cls-2,
             .prefix__cls-3,
             .prefix__cls-5 {
-                fill: none;
+                fill: hsl(60, 100%, 97%);
                 stroke-linecap: round;
                 stroke-width: .57px
             }

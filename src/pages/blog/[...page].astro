@@ -1,0 +1,41 @@
+---
+import Card from "../../components/Card.astro";
+import BaseLayout from '../../layouts/Layout.astro';
+import Pagination from "../../components/Pagination.astro";
+
+interface PostDataType {
+	_id: string;
+	author: AuthorType;
+	title: string;
+	body:string;
+	published: boolean;
+	timestamp: string;
+}
+
+interface AuthorType {
+	id: string;
+	name: string;
+}
+
+export async function getStaticPaths({ paginate } : { paginate: any}) {
+	const response = await fetch('https://blog-api-ol7v.onrender.com/v1/posts'); 
+	const data = await response.json();
+	const posts: PostDataType[] = await data.posts;
+	return paginate(posts, { pageSize: 4 });
+}
+
+const { page } = Astro.props;
+
+// <Card href={post._id} title={post.title} body={post.body}></Card>
+// 
+---
+<BaseLayout title={`Incursions page: ${page.currentPage}`}>
+    <main class="flex flex-col md:min-h-[94dvh] py-2">
+		<ul class="grid gap-16 grow place-content-start py-8">
+			{page.data.map((postData: PostDataType) => postData.published && <Card data={postData}/>)}
+		</ul>
+		<Pagination prevUrl={page.url.prev} nextUrl={page.url.next}/>
+	</main>
+</BaseLayout>
+
+

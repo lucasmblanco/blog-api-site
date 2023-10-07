@@ -1,0 +1,12 @@
+---
+const {prevUrl, nextUrl} = Astro.props; 
+---
+
+<div class="flex justify-center items-center gap-2 w-full">
+    {
+        prevUrl ? <a href={prevUrl}>Prev</a> : <p class="opacity-50 text-sm">Prev</p>
+    }
+    {
+        nextUrl ? <a href={nextUrl}>Next</a> : <p class="opacity-50 text-sm">Next</p>
+    }
+</div>

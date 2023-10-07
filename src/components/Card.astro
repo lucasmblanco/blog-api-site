@@ -20,21 +20,23 @@ const dateInfo = new Date(data.timestamp);
 
 ---
 
-<li class="flex p-10 gap-2">
-	<div class="grid place-content-start border-2 border-ivory h-fit justify-items-center font-bold rounded font-georgia">
+<li class="flex gap-2">
+	<div class="grid place-content-start  border-r-2 border-ivory h-fit justify-items-center font-bold font-georgia">
 		<p class="px-3 text-4xl">{dateInfo.getDay()}</p>
 		<p class="px-3"> {dateInfo.toLocaleString('default', { month: 'short'})}</p>
 		<p class="px-3 bg-ivory w-full text-black-brown">{dateInfo.getFullYear()}</p>
 	</div>
 	<div>
-		<a href={`/post/${data._id}`}>
-			<h2 class="text-2xl hover:underline font-bold mb-5">
-				{data.title}
-			</h2>
-		</a>
-		<section class="line-clamp-5 font-georgia text-sm">
-			<Fragment set:html={data.body}/>	
-		</section>
+		<div class="grid gap-2">
+			<a href={`/post/${data._id}`}>
+				<h2 class="text-2xl hover:underline font-georgia font-bold select-none">
+					{data.title}
+				</h2>
+			</a>
+			<section class="line-clamp-5 font-georgia text-sm opacity-70 select-none">
+				<Fragment set:html={data.body}/>	
+			</section>
+		</div>
 	</div>
 </li>
 <style is:global>

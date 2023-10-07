@@ -41,7 +41,7 @@ export default function loginForm() {
             <h1 className='text-4xl py-8 px-4'>
             /login
             </h1>
-                <hr />
+            <hr />
             <form onSubmit={handleSubmit(onSubmit)} className='grid gap-4 w-full py-8 px-4'>
                     <div className='flex gap-2'>
                         <label htmlFor='username'>username:</label>
@@ -54,7 +54,7 @@ export default function loginForm() {
                     <button type='submit' className='flex items-center justify-center hover:bg-ivory hover:text-black-brown rounded py-2 text-lg font-bold'><ArrowLongRightIcon className='h-6 w-6'/>Log in <ArrowLongLeftIcon className='h-6 w-6'/></button>
             </form>
             </div>
-            <div className='hidden md:block'>
+            <div className='hidden md:block scale-[2.5] -translate-x-56 translate-y-56'>
                 <LogImg />
             </div>
         </>

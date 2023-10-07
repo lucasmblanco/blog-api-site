@@ -31,10 +31,12 @@ const { postData } = Astro.props;
 
 ---
 <BaseLayout title={postData.title}>
-    <h1 class="text-3xl py-10 text-center">{postData.title}</h1>
-    <p class="opacity-50">{new Date(postData.timestamp).toLocaleDateString()}</p>
-    <p class="opacity-100"><span class="opacity-50">by </span>{postData.author.username}</p>
-    <main class="grid auto-cols-auto gap-5">
+    <h1 class="text-3xl py-10 text-center font-bold font-georgia select-none">{postData.title}</h1>
+    <div class="flex flex-col items-center">
+        <p class="opacity-50">{new Date(postData.timestamp).toLocaleDateString()}</p>
+        <p class="opacity-100"><span class="opacity-50">by </span>{postData.author.username}</p>
+    </div>
+    <main class="grid auto-cols-auto gap-5 font-georgia select-none">
         <p set:html={postData.body} class="my-5"></p>
     </main>
     <hr/>
