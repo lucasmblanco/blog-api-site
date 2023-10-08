@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../layouts/Layout.astro';
-import QueryProvider from '../../components/QueryProvider';
+import BaseLayout from '../../../layouts/Layout.astro'
+import QueryProvider from '../../../components/QueryProvider';
 
 interface AuthorType {
 	id: string;
@@ -36,11 +36,20 @@ const { postData } = Astro.props;
         <p class="opacity-50">{new Date(postData.timestamp).toLocaleDateString()}</p>
         <p class="opacity-100"><span class="opacity-50">by </span>{postData.author.username}</p>
     </div>
-    <main class="grid auto-cols-auto gap-5 font-georgia select-none">
-        <p set:html={postData.body} class="my-5"></p>
+    <main class="grid auto-cols-auto gap-5 font-georgia select-none py-2">
+        <Fragment set:html={postData.body} class="my-5 main-paragraph"/>
     </main>
     <hr/>
     <QueryProvider client:load id={postData._id}/>
 </BaseLayout>
+<style is:global>
+    main p,  {
+        padding-block: 0.5rem;
+    }
+    main h1, h2, h3, h4, h5, h6{
+        padding-block: 1rem;
+    }
+    
+</style>
 
 

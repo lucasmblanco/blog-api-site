@@ -56,13 +56,13 @@ export default function UserComment({ id, isOnComment = false, postId}: { id: st
             setUserIsLogged(false);
         }
     })
-  
+
     
     return (
             <section className='font-georgia py-2'>
                 <form ref={userForm} onSubmit={handleSubmit(onSubmit)} className="grid gap-3 py-2">
                     <label htmlFor="comment" hidden>Comment</label>
-                    <textarea {...register('comment')} id="comment" className="outline-none border text-sm border-black-brown bg-black-brown-dark rounded-lg resize-none p-2 focus:border-ivory" placeholder='Write a comment...'>
+                    <textarea {...register('comment')} id="comment" className="outline-none border text-sm border-black-brown bg-black-brown-dark rounded-lg resize-none p-2 focus:border-ivory focus:outline-none focus:ring ring-ivory hover:ring-1" placeholder='Write a comment...' autoComplete='on'>
                     </textarea>
                     <div className='flex justify-between'>
                         <LikesProvider>

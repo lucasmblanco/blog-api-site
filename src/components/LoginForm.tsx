@@ -44,11 +44,11 @@ export default function loginForm() {
                     <form onSubmit={handleSubmit(onSubmit)} className='grid gap-4 w-full py-8 px-4'>
                         <div className='flex gap-2'>
                             <label htmlFor='username'>username:</label>
-                            <input type="text" id="username" {...register('username')} className='text-ivory bg-transparent border-b border-ivory w-full outline-none' />
+                            <input type="text" id="username" {...register('username')} className='text-ivory bg-transparent border-b border-ivory w-full focus:outline-none focus:ring ring-ivory hover:ring-1' autoComplete='username'/>
                         </div>
                         <div className='flex gap-2'>
                             <label htmlFor='password'>password:</label>
-                            <input type="password" id="password" {...register('password')} className='text-ivory bg-transparent border-b border-ivory w-full outline-none'/>
+                            <input type="password" id="password" {...register('password')} className='text-ivory bg-transparent border-b border-ivory w-full focus:outline-none focus:ring ring-ivory hover:ring-1' autoComplete='current-password'/>
                         </div>
                         <button type='submit' className='flex items-center justify-center hover:bg-ivory hover:text-black-brown rounded py-2 text-lg font-bold'><ArrowLongRightIcon className='h-6 w-6'/>Log in <ArrowLongLeftIcon className='h-6 w-6'/></button>
                     </form>

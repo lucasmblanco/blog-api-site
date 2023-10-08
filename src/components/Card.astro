@@ -28,7 +28,7 @@ const dateInfo = new Date(data.timestamp);
 	</div>
 	<div>
 		<div class="grid gap-2">
-			<a href={`/post/${data._id}`}>
+			<a href={`/blog/post/${data._id}`}>
 				<h2 class="text-2xl hover:underline font-georgia font-bold select-none">
 					{data.title}
 				</h2>
@@ -36,7 +36,7 @@ const dateInfo = new Date(data.timestamp);
 			<section class="line-clamp-4 md:line-clamp-6 font-georgia text-sm opacity-70 select-none">
 				<Fragment set:html={data.body}/>	
 			</section>
-			<a href={`/post/${data._id}`} class="w-full text-end hover:underline">Read more...</a>
+			<a href={`/blog/post/${data._id}`} class="w-full text-end hover:underline">Read more...</a>
 		</div>
 	</div>
 </li>
